@@ -123,7 +123,7 @@ function Employee(props) {
                 Tên tài khoản
               </th>
               <th scope="col" className="align-middle">
-                Mật khẩu
+                CCCD
               </th>
               <th scope="col" className="align-middle">
                 Email{" "}
@@ -171,10 +171,10 @@ function Employee(props) {
                   />
                 </td>
                 <td className="align-middle">{item.username}</td>
-                <td className="align-middle">**********</td>
+                <td className="align-middle">{item.cccd}</td>
                 <td className="align-middle">{item.email}</td>
                 <td className="align-middle">{item.phone}</td>
-                <td className="align-middle">{roleEnum[item.roleid]}</td>
+                <td className="align-middle">{roleEnum[item.role_id]}</td>
                 <td className="align-middle">
                   <ToggleSwitch
                     status={item.active}

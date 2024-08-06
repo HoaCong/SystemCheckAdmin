@@ -7,9 +7,32 @@ import PageNotFound from "pages/NotFoundPage";
 // import Register from "pages/Register";
 
 export const EnumHome = {
+  ADMIN: ROUTES.ADMIN_HOME_PAGE,
   MANAGER: ROUTES.ADMIN_HOME_PAGE,
   EMPLOYEE: ROUTES.ADMIN_HOME_PAGE,
 };
+
+export const adminRoutes = [
+  {
+    path: ROUTES.ADMIN_HOME_PAGE,
+    name: "Admin Layout",
+    element: <AdminLayout />,
+    children: [
+      { isRoot: true, name: "Dashboard Page", element: <AdminDashboard /> },
+      {
+        path: ROUTES.ADMIN_DASHBOARD,
+        name: "Dashboard Page",
+        element: <AdminDashboard />,
+      },
+      {
+        path: ROUTES.ADMIN_EMPLOYEE,
+        name: "Employee",
+        element: <AdminEmployee />,
+      },
+      { path: "*", name: "Not Found Page", element: <PageNotFound /> },
+    ],
+  },
+];
 
 export const managerRoutes = [
   {

@@ -13,11 +13,11 @@ import { isValidPhoneNumber } from "../../../helper/functions";
 import { roleEnum } from "./helper";
 const initialData = {
   username: "",
+  cccd: "",
   email: "",
-  image: "",
   phone: "",
   password: "",
-  roleid: "MANAGER",
+  role_id: "MANAGER",
 };
 
 function FormEmployee({ data: { type, visible, info }, onClear }) {
@@ -32,6 +32,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
   const [data, setData] = useState(initialData);
 
   const [error, setError] = useState(initialData);
+  console.log("FormEmployee  error:", error);
 
   useEffect(() => {
     if (!_isEmpty(info)) {
@@ -53,7 +54,9 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
   };
 
   const handleSubmit = () => {
-    const tmpKey = Object.keys(_omit(data, "image"));
+    const tmpKey = Object.keys(
+      _omit(data, ["image", "count_check_current", "session_id"])
+    );
     let validates = true;
     tmpKey.forEach((key) => {
       if (data[key] === "") {
@@ -76,8 +79,10 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
       }
     });
     if (validates) {
-      if (type === "create") onAddEmployee({ ...data });
-      if (type === "edit") onEditEmployee({ ...data });
+      if (type === "create")
+        onAddEmployee({ ...data, count_check_current: 100 });
+      if (type === "edit")
+        onEditEmployee({ ...data, count_check_current: 100 });
     }
   };
   const handleClose = () => {
@@ -129,6 +134,29 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           )}
         </div>
         <div className="col-6">
+          <Form.Label htmlFor="CCCD">
+            CCCD <span className="required">*</span>
+          </Form.Label>
+          <Form.Control
+            type="text"
+            id="cccd"
+            name="cccd"
+            defaultValue={data.cccd}
+            aria-describedby="helperCCCD"
+            disabled={["detail", "edit"].includes(type)}
+            onChange={handleChange}
+          />
+          {error.cccd && (
+            <Form.Text
+              id="helperCCCD"
+              danger="true"
+              bsPrefix="d-inline-block text-danger lh-1"
+            >
+              {error.cccd}
+            </Form.Text>
+          )}
+        </div>
+        <div className="col-6 mt-3">
           <Form.Label htmlFor="Name">
             Email <span className="required">*</span>
           </Form.Label>
@@ -204,8 +232,8 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           </Form.Label>
           <Form.Select
             aria-label="Quyền"
-            name="roleid"
-            value={data.roleid}
+            name="role_id"
+            value={data.role_id}
             onChange={handleChange}
             disabled={type === "detail"}
           >
@@ -216,7 +244,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
             ))}
           </Form.Select>
         </div>
-        <div className="col-6 mt-3">
+        {/* <div className="col-6 mt-3">
           <Form.Label htmlFor="Image">
             Hình ảnh <span className="required">*</span>
           </Form.Label>
@@ -242,7 +270,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
               {error.image}
             </Form.Text>
           )}
-        </div>
+        </div> */}
       </form>
     </ModalBlock>
   );

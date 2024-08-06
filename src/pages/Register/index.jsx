@@ -91,7 +91,7 @@ function Register(props) {
       const newData = _omit(formdata, ["confirm_password"]);
       onRegister({
         ...newData,
-        roleid: "MANAGER",
+        role_id: "MANAGER",
         image: "",
       });
     }

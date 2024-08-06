@@ -44,7 +44,7 @@ function* callApiAdd({ params }) {
       yield put(actionAddFailed());
       yield put(
         addToast({
-          text: "Add employee failed",
+          text: response.message || "Add employee failed",
           type: "danger",
           title: "",
         })

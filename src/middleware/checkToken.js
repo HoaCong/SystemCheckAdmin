@@ -23,7 +23,7 @@ const CheckTokenMiddleware = ({ children }) => {
       if (isLoginPage) return;
       return navigate(ROUTES.LOGIN);
     } else if (isLoginPage) {
-      return navigate(EnumHome[user?.roleid]);
+      return navigate(EnumHome[user?.role_id]);
     }
   }, [access_token, pathname]);
 

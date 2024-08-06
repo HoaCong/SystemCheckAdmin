@@ -1,5 +1,5 @@
 import logo from "assets/images/logo192.png";
-import { MENU_EMPLOYEE, MENU_MANAGER } from "constants/routerMenu";
+import { MENU_ADMIN, MENU_EMPLOYEE, MENU_MANAGER } from "constants/routerMenu";
 import React, { useCallback, useEffect, useState } from "react";
 
 import { Link, NavLink } from "react-router-dom";
@@ -14,14 +14,16 @@ function Menu({ collapsed }) {
   const [list, setList] = useState([]);
 
   useEffect(() => {
+    const adminMenu = MENU_ADMIN;
     const managerMenu = MENU_MANAGER;
     const employeeMenu = MENU_EMPLOYEE;
     const EnumRoutes = {
+      ADMIN: adminMenu,
       MANAGER: managerMenu,
       EMPLOYEE: employeeMenu,
     };
-    setList(EnumRoutes[user?.roleid] || []);
-  }, [user?.roleid]);
+    setList(EnumRoutes[user?.role_id] || []);
+  }, [user?.role_id]);
 
   const [prevIndex, setPrevIndex] = useState(0);
   const activeSubItem = useCallback(

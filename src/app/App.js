@@ -5,7 +5,7 @@ import CheckTokenMiddleware from "middleware/checkToken";
 import { useCallback } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-import { employeeRoutes, managerRoutes, publicRoutes } from "router";
+import { adminRoutes, employeeRoutes, managerRoutes, publicRoutes } from "router";
 import "./index.scss";
 
 function App() {
@@ -15,14 +15,16 @@ function App() {
   const { popup } = useSelector((state) => state.toastReducer);
 
   const listRouter = useCallback(() => {
+    const ADMIN_MENU = [...publicRoutes, ...adminRoutes];
     const MANAGER_MENU = [...publicRoutes, ...managerRoutes];
     const EMPLOYEE_MENU = [...publicRoutes, ...employeeRoutes];
     const ENUM_MENU = {
+      ADMIN: ADMIN_MENU,
       MANAGER: MANAGER_MENU,
       EMPLOYEE: EMPLOYEE_MENU, // do add string type
     };
-    return ENUM_MENU[user?.roleid] || ENUM_MENU["MANAGER"];
-  }, [user?.roleid]);
+    return ENUM_MENU[user?.role_id] || ENUM_MENU["MANAGER"];
+  }, [user?.role_id]);
 
   const renderRoutes = useCallback((routes) => {
     return routes?.map((route, index) => {
