@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import ModalBlock from "components/common/Modal";
-import UploadImage from "components/common/UploadImage";
 import _capitalize from "lodash/capitalize";
 import _isEmpty from "lodash/isEmpty";
 import _map from "lodash/map";
@@ -12,6 +11,7 @@ import { actionAdd, actionEdit } from "store/Employee/action";
 import { isValidPhoneNumber } from "../../../helper/functions";
 import { roleEnum } from "./helper";
 const initialData = {
+  count_check_current: "",
   username: "",
   cccd: "",
   email: "",
@@ -32,7 +32,6 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
   const [data, setData] = useState(initialData);
 
   const [error, setError] = useState(initialData);
-  console.log("FormEmployee  error:", error);
 
   useEffect(() => {
     if (!_isEmpty(info)) {
@@ -55,7 +54,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
 
   const handleSubmit = () => {
     const tmpKey = Object.keys(
-      _omit(data, ["image", "count_check_current", "session_id"])
+      _omit(data, ["image", "session_id", "cccd", "phone"])
     );
     let validates = true;
     tmpKey.forEach((key) => {
@@ -79,10 +78,10 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
       }
     });
     if (validates) {
-      if (type === "create")
-        onAddEmployee({ ...data, count_check_current: 100 });
-      if (type === "edit")
-        onEditEmployee({ ...data, count_check_current: 100 });
+      const newData = { ...data };
+      newData.count_check_current = +data.count_check_current;
+      if (type === "create") onAddEmployee({ ...newData });
+      if (type === "edit") onEditEmployee({ ...newData });
     }
   };
   const handleClose = () => {
@@ -134,9 +133,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           )}
         </div>
         <div className="col-6">
-          <Form.Label htmlFor="CCCD">
-            CCCD <span className="required">*</span>
-          </Form.Label>
+          <Form.Label htmlFor="CCCD">CCCD</Form.Label>
           <Form.Control
             type="text"
             id="cccd"
@@ -180,9 +177,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           )}
         </div>
         <div className="col-6 mt-3">
-          <Form.Label htmlFor="Name">
-            Số điện thoại <span className="required">*</span>
-          </Form.Label>
+          <Form.Label htmlFor="Name">Số điện thoại</Form.Label>
           <Form.Control
             type="text"
             id="Phone"
@@ -244,33 +239,29 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
             ))}
           </Form.Select>
         </div>
-        {/* <div className="col-6 mt-3">
-          <Form.Label htmlFor="Image">
-            Hình ảnh <span className="required">*</span>
+        <div className="col-6 mt-3">
+          <Form.Label htmlFor="CountCheckCurrent">
+            Số lượt check <span className="required">*</span>
           </Form.Label>
-          <UploadImage
-            image={data.image || ""}
-            callback={(url) =>
-              handleChange({
-                target: {
-                  name: "image",
-                  value: url,
-                },
-              })
-            }
-            geometry="radius"
-            showUpload={type !== "detail"}
+          <Form.Control
+            type="text"
+            id="CountCheckCurrent"
+            name="count_check_current"
+            defaultValue={data.count_check_current}
+            aria-describedby="helperCountCheckCurrent"
+            disabled={type === "detail"}
+            onChange={handleChange}
           />
-          {error.image && (
+          {error.count_check_current && (
             <Form.Text
-              id="helperImage"
+              id="helperCountCheckCurrent"
               danger="true"
               bsPrefix="d-inline-block text-danger lh-1"
             >
-              {error.image}
+              {error.count_check_current}
             </Form.Text>
           )}
-        </div> */}
+        </div>
       </form>
     </ModalBlock>
   );

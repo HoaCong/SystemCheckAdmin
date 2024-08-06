@@ -2,7 +2,6 @@
 import ActionTable from "components/common/ActionTable";
 import CustomPagination from "components/common/CustomPagination";
 import CustomTooltip from "components/common/CustomTooltip";
-import LazyLoadImage from "components/common/LazyLoadImage";
 import LinearProgress from "components/common/LinearProgress";
 import ToggleSwitch from "components/common/ToggleSwitch";
 import TemplateContent from "components/layout/TemplateContent";
@@ -117,28 +116,31 @@ function Employee(props) {
                 #
               </th>
               <th scope="col" className="align-middle">
-                Hình ảnh
-              </th>
-              <th scope="col" className="align-middle">
                 Tên tài khoản
               </th>
               <th scope="col" className="align-middle">
                 CCCD
               </th>
               <th scope="col" className="align-middle">
-                Email{" "}
+                Email
               </th>
               <th scope="col" className="align-middle">
-                Số điện thoại{" "}
+                Số điện thoại
               </th>
               <th scope="col" className="align-middle">
-                Quyền{" "}
+                Quyền
               </th>
               <th scope="col" className="align-middle">
-                Trạng thái{" "}
+                Trạng thái
               </th>
               <th scope="col" className="align-middle">
-                Hành động{" "}
+                Số lượt check
+              </th>
+              <th scope="col" className="align-middle">
+                Đã check
+              </th>
+              <th scope="col" className="align-middle">
+                Hành động
               </th>
             </tr>
           </thead>
@@ -162,14 +164,6 @@ function Employee(props) {
                 <th scope="row" className="align-middle">
                   {index + 1}
                 </th>
-                <td className="align-middle">
-                  <LazyLoadImage
-                    src={item.image}
-                    alt={item.name}
-                    width={50}
-                    height={50}
-                  />
-                </td>
                 <td className="align-middle">{item.username}</td>
                 <td className="align-middle">{item.cccd}</td>
                 <td className="align-middle">{item.email}</td>
@@ -190,6 +184,8 @@ function Employee(props) {
                     }
                   />
                 </td>
+                <td className="align-middle">{item.count_check_current}</td>
+                <td className="align-middle">{item.count_checked}</td>
                 <td className="align-middle">
                   <ActionTable
                     onDetail={() =>

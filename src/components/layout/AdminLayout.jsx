@@ -1,4 +1,3 @@
-import Footer from "components/footer";
 import Header from "components/header";
 import Menu from "components/menu";
 import React, { useState } from "react";
@@ -26,7 +25,6 @@ function AdminLayout(props) {
         <div className="height-content p-2">
           <Outlet />
         </div>
-        <Footer />
       </main>
     </div>
   );
