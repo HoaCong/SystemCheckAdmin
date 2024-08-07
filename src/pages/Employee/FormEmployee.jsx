@@ -9,7 +9,7 @@ import Form from "react-bootstrap/Form";
 import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAdd, actionEdit } from "store/Employee/action";
-import { isValidPhoneNumber } from "../../../helper/functions";
+import { isValidPhoneNumber } from "../../helper/functions";
 import { roleEnum } from "./helper";
 
 const initialData = {
@@ -26,7 +26,9 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
   const {
     actionStatus: { isLoading, isSuccess },
   } = useSelector((state) => state.employeeReducer);
-
+  const {
+    data: { user },
+  } = useSelector((state) => state.loginReducer);
   const dispatch = useDispatch();
   const onAddEmployee = (body) => dispatch(actionAdd(body));
   const onEditEmployee = (body) => dispatch(actionEdit(body));
@@ -96,6 +98,11 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
     detail: "Thông tin tài khoản",
     edit: "Chỉnh sửa tài khoản",
     create: "Thêm mới tài khoản",
+  };
+
+  const ROLE = {
+    ADMIN: roleEnum,
+    MANAGER: [roleEnum[1]],
   };
 
   return (
@@ -234,7 +241,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
             onChange={handleChange}
             disabled={type === "detail"}
           >
-            {_map(roleEnum, (value, index) => (
+            {_map(ROLE[user?.role_id], (value, index) => (
               <option key={value} value={index}>
                 {value}
               </option>

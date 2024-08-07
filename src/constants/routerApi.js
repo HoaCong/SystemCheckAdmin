@@ -1,8 +1,6 @@
 export const ENDPOINT = {
   LOGIN: "/api/login",
   REGISTER: "/register",
-  // =========/api/dashboard===========
-  DASHBOARD: "/api/dashboard",
   // ======/api/employee======
   LIST_EMPLOYEE: "/api/employee/search",
   ADD_EMPLOYEE: "/api/employee/create",
@@ -11,4 +9,5 @@ export const ENDPOINT = {
   DETAIL_EMPLOYEE: "/api/employee/",
   UPDATE_DETAIL_EMPLOYEE: "/api/employee/detail/",
   DOWNLOAD_EXCEL: "/api/as/download-excel",
+  CHANGE_PASSWORD: "/api/employee/changepassword/",
 };

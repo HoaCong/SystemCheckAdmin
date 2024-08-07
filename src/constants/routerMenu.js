@@ -1,12 +1,6 @@
 import { ROUTES } from "./routerWeb";
 export const MENU_ADMIN = [
   {
-    label: "Trang chủ",
-    active: false,
-    src: ROUTES.ADMIN_DASHBOARD,
-    icon: <i className="fas fa-home"></i>,
-  },
-  {
     label: "Nhân viên",
     active: false,
     src: ROUTES.ADMIN_EMPLOYEE,
@@ -15,12 +9,6 @@ export const MENU_ADMIN = [
 ];
 
 export const MENU_MANAGER = [
-  {
-    label: "Trang chủ",
-    active: false,
-    src: ROUTES.ADMIN_DASHBOARD,
-    icon: <i className="fas fa-home"></i>,
-  },
   {
     label: "Nhân viên",
     active: false,

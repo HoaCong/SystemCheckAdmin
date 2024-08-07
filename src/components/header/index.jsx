@@ -20,6 +20,10 @@ function Header({ menuIcon, children }) {
     onLogout();
     navigate(ROUTES.LOGIN);
   };
+
+  const handleChangePassword = () => {
+    navigate(ROUTES.CHANGE_PASSWORD);
+  };
   return (
     <div className="header h-60px">
       <div className="d-flex h-100 justify-content-between align-items-center px-2">
@@ -42,6 +46,12 @@ function Header({ menuIcon, children }) {
                   !isActive ? "d-none" : ""
                 } sub-menu-account list-unstyled`}
               >
+                <li onClick={handleChangePassword}>
+                  <Link className="text-dark">
+                    <i class="fas fa-unlock-alt me-2"></i>
+                    Đổi mật khẩu
+                  </Link>
+                </li>
                 <li onClick={handleLogout}>
                   <Link className="text-dark">
                     <i className="fas fa-sign-out-alt me-2"></i>Logout
