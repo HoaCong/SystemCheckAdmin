@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  actionChangeActive,
   actionDelete,
-  actionDownloadExcel,
   actionGetList,
   resetData,
 } from "store/Employee/action";
@@ -26,11 +26,14 @@ function Employee(props) {
     params,
     meta,
   } = useSelector((state) => state.employeeReducer);
+  const {
+    data: { user },
+  } = useSelector((state) => state.loginReducer);
 
   const dispatch = useDispatch();
   const onGetListEmployee = (body) => dispatch(actionGetList(body));
   const onDeleteEmployee = (body) => dispatch(actionDelete(body));
-  const onDownloadExcel = () => dispatch(actionDownloadExcel());
+  const onChangeActive = (body) => dispatch(actionChangeActive(body));
   const onResetData = () => dispatch(resetData());
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,6 +46,7 @@ function Employee(props) {
     target: null,
     visible: false,
     info: null,
+    type: "",
   });
   const [query, setQuery] = useState("");
 
@@ -67,6 +71,7 @@ function Employee(props) {
       visible: false,
       target: null,
       info: null,
+      type: "",
     });
   };
   const handleSearch = (type) => {
@@ -74,6 +79,11 @@ function Employee(props) {
     onGetListEmployee({ ...params, page: 1, query: tmpQuery });
     setCurrentPage(1);
     if (type === "reset") setQuery("");
+  };
+
+  const handleDelete = () => {
+    if (tooltip.type === "change") onChangeActive(tooltip.info.id);
+    if (tooltip.type === "delete") onDeleteEmployee(tooltip.info.id);
   };
 
   return (
@@ -113,13 +123,19 @@ function Employee(props) {
             >
               Đặt lại
             </Button>
-            <Button
-              variant="outline-primary"
-              className="ms-auto"
-              onClick={onDownloadExcel}
-            >
-              Tải file Excel
-            </Button>
+
+            {"ADMIN" === user?.role_id ? (
+              <Button variant="outline-primary" className="ms-auto">
+                <a
+                  href={`${process.env.REACT_APP_BASE_URL}/api/as/download-excel`}
+                  download="file.xlsx"
+                >
+                  Xuất file excel
+                </a>
+              </Button>
+            ) : (
+              <></>
+            )}
           </div>
         }
       >
@@ -195,6 +211,7 @@ function Employee(props) {
                             prev.target === e.target ? !tooltip.visible : true,
                           target: e.target,
                           info: item,
+                          type: "change",
                         };
                       })
                     }
@@ -208,6 +225,22 @@ function Employee(props) {
                     onEdit={() =>
                       setDetail({ info: item, visible: true, type: "edit" })
                     }
+                    {...("ADMIN" === user?.role_id
+                      ? {
+                          onDelete: (e) =>
+                            setTooltip((prev) => {
+                              return {
+                                visible:
+                                  prev.target === e.target
+                                    ? !tooltip.visible
+                                    : true,
+                                target: e.target,
+                                info: item,
+                                type: "delete",
+                              };
+                            }),
+                        }
+                      : [])}
                   />
                 </td>
               </tr>
@@ -233,13 +266,19 @@ function Employee(props) {
       />
 
       <CustomTooltip
-        content={`Bạn có chắc muốn ${
-          tooltip.info?.active ? "hủy " : ""
-        }kích hoạt nhân viên này không?`}
+        content={
+          tooltip.type === "change"
+            ? `Bạn có chắc muốn ${
+                tooltip.info?.active ? "hủy " : ""
+              }kích hoạt nhân viên này không?`
+            : `Bạn có chắc muốn ${
+                tooltip.info?.active ? "xóa " : ""
+              }kích hoạt nhân viên này không?`
+        }
         tooltip={tooltip}
         loading={actionLoading}
         onClose={onCloseTooltip}
-        onDelete={() => onDeleteEmployee(tooltip.info.id)}
+        onDelete={handleDelete}
       />
     </div>
   );

@@ -74,6 +74,25 @@ const employeeReducer = (state = initialState, action) => {
         draft.actionStatus.isFailure = true;
         break;
 
+      case ActionTypes.CHANGE_ACTIVE:
+        draft.actionStatus.isLoading = true;
+        draft.actionStatus.isSuccess = false;
+        draft.actionStatus.isFailure = false;
+        break;
+
+      case ActionTypes.CHANGE_ACTIVE_SUCCESS:
+        draft.actionStatus.isLoading = false;
+        draft.actionStatus.isSuccess = true;
+        draft.list = state.list.map((item) =>
+          item.id === action.id ? { ...item, active: +!item.active } : item
+        );
+        break;
+
+      case ActionTypes.CHANGE_ACTIVE_FAILED:
+        draft.actionStatus.isLoading = false;
+        draft.actionStatus.isFailure = true;
+        break;
+
       case ActionTypes.DELETE:
         draft.actionStatus.isLoading = true;
         draft.actionStatus.isSuccess = false;
@@ -83,9 +102,7 @@ const employeeReducer = (state = initialState, action) => {
       case ActionTypes.DELETE_SUCCESS:
         draft.actionStatus.isLoading = false;
         draft.actionStatus.isSuccess = true;
-        draft.list = state.list.map((item) =>
-          item.id === action.id ? { ...item, active: +!item.active } : item
-        );
+        draft.list = state.list.filter((item) => item.id !== action.id);
         break;
 
       case ActionTypes.DELETE_FAILED:

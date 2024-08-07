@@ -2,6 +2,7 @@ import AdminLayout from "components/layout/AdminLayout";
 import { ROUTES } from "constants/routerWeb";
 import ChangePassword from "pages/ChangePassword";
 import Employee from "pages/Employee";
+import Histories from "pages/Histories";
 import Login from "pages/Login";
 import PageNotFound from "pages/NotFoundPage";
 // import Register from "pages/Register";
@@ -46,21 +47,7 @@ export const managerRoutes = [
   },
 ];
 
-export const employeeRoutes = [
-  {
-    path: ROUTES.ADMIN_HOME_PAGE,
-    name: "Admin Layout",
-    element: <AdminLayout />,
-    children: [
-      {
-        path: ROUTES.ADMIN_EMPLOYEE,
-        name: "Employee",
-        element: <Employee />,
-      },
-      { path: "*", name: "Not Found Page", element: <PageNotFound /> },
-    ],
-  },
-];
+export const employeeRoutes = [];
 
 export const publicRoutes = [
   {
@@ -72,6 +59,11 @@ export const publicRoutes = [
         path: ROUTES.CHANGE_PASSWORD,
         name: "Employee",
         element: <ChangePassword />,
+      },
+      {
+        path: ROUTES.ADMIN_HISTORY,
+        name: "Histories",
+        element: <Histories />,
       },
     ],
   },

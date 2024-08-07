@@ -7,7 +7,9 @@ export const ENDPOINT = {
   EDIT_EMPLOYEE: "/api/employee/",
   ACTIVE_EMPLOYEE: "/api/employee/active/",
   DETAIL_EMPLOYEE: "/api/employee/",
+  DELETE_EMPLOYEE: "/api/employee/",
   UPDATE_DETAIL_EMPLOYEE: "/api/employee/detail/",
   DOWNLOAD_EXCEL: "/api/as/download-excel",
   CHANGE_PASSWORD: "/api/employee/changepassword/",
+  HISTORIES: "/api/histories",
 };

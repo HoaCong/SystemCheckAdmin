@@ -6,6 +6,12 @@ export const MENU_ADMIN = [
     src: ROUTES.ADMIN_EMPLOYEE,
     icon: <i className="fas fa-users-cog"></i>,
   },
+  {
+    label: "Lịch sử tìm kiếm",
+    active: false,
+    src: ROUTES.ADMIN_HISTORY,
+    icon: <i className="fas fa-history"></i>,
+  },
 ];
 
 export const MENU_MANAGER = [
@@ -15,13 +21,19 @@ export const MENU_MANAGER = [
     src: ROUTES.ADMIN_EMPLOYEE,
     icon: <i className="fas fa-users-cog"></i>,
   },
+  {
+    label: "Lịch sử tìm kiếm",
+    active: false,
+    src: ROUTES.ADMIN_HISTORY,
+    icon: <i className="fas fa-history"></i>,
+  },
 ];
 
 export const MENU_EMPLOYEE = [
   {
-    label: "Nhân viên",
+    label: "Lịch sử tìm kiếm",
     active: false,
-    src: ROUTES.ADMIN_EMPLOYEE,
-    icon: <i className="fas fa-users-cog"></i>,
+    src: ROUTES.ADMIN_HISTORY,
+    icon: <i className="fas fa-history"></i>,
   },
 ];

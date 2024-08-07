@@ -6,4 +6,5 @@ export const ROUTES = {
   // admin routes
   ADMIN_HOME_PAGE: "/",
   ADMIN_EMPLOYEE: "/employee",
+  ADMIN_HISTORY: "/histories",
 };

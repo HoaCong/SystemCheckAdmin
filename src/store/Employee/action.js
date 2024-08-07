@@ -90,6 +90,21 @@ export const actionDetailFailed = (error) => ({
   error,
 });
 
+export const actionChangeActive = (id) => ({
+  type: ActionTypes.CHANGE_ACTIVE,
+  id,
+});
+
+export const actionChangeActiveSuccess = (id) => ({
+  type: ActionTypes.CHANGE_ACTIVE_SUCCESS,
+  id,
+});
+
+export const actionChangeActiveFailed = (error) => ({
+  type: ActionTypes.CHANGE_ACTIVE_FAILED,
+  error,
+});
+
 export const actionDownloadExcel = (id) => ({
   type: ActionTypes.DOWNLOAD_EXCEL,
   id,

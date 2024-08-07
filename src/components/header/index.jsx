@@ -32,6 +32,9 @@ function Header({ menuIcon, children }) {
         {/* Right header */}
         {user?.username ? (
           <div className=" d-flex justify-content-end align-items-center gap-4 mx-1 ms-auto">
+            <div>
+              Còn lại: <b>{user.count_check_current}</b> lượt
+            </div>
             <div
               onClick={() => setIsActive((prev) => !prev)}
               className="account-header d-flex gap-2 align-items-center"
@@ -48,7 +51,7 @@ function Header({ menuIcon, children }) {
               >
                 <li onClick={handleChangePassword}>
                   <Link className="text-dark">
-                    <i class="fas fa-unlock-alt me-2"></i>
+                    <i className="fas fa-unlock-alt me-2"></i>
                     Đổi mật khẩu
                   </Link>
                 </li>
