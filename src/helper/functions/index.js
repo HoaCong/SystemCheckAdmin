@@ -1,4 +1,5 @@
 import _random from "lodash/random";
+import _size from "lodash/size";
 
 export const parserRouter = (router, id) => {
   return router.replace(":id", id);
@@ -48,4 +49,18 @@ export const getIndexActive = (list) => {
       item.status === "IN_PROCCESS" ? item.session : 1000000000000000
     )
   );
+};
+
+export const download = async (data, format) => {
+  const file = document.createElement("a");
+  document.body.appendChild(file);
+  if (_size(data) > 0) {
+    file.setAttribute("download", format);
+    file.setAttribute(
+      "href",
+      `data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(data))}`
+    );
+    file.click();
+  }
+  document.body.removeChild(file);
 };

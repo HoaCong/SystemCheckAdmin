@@ -6,10 +6,12 @@ import _map from "lodash/map";
 import _omit from "lodash/omit";
 import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
+import { NumericFormat } from "react-number-format";
 import { useDispatch, useSelector } from "react-redux";
 import { actionAdd, actionEdit } from "store/Employee/action";
 import { isValidPhoneNumber } from "../../../helper/functions";
 import { roleEnum } from "./helper";
+
 const initialData = {
   count_check_current: "",
   username: "",
@@ -140,7 +142,7 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
             name="cccd"
             defaultValue={data.cccd}
             aria-describedby="helperCCCD"
-            disabled={["detail", "edit"].includes(type)}
+            disabled={["detail"].includes(type)}
             onChange={handleChange}
           />
           {error.cccd && (
@@ -243,14 +245,22 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
           <Form.Label htmlFor="CountCheckCurrent">
             Số lượt check <span className="required">*</span>
           </Form.Label>
-          <Form.Control
-            type="text"
+          <NumericFormat
+            thousandSeparator={true}
             id="CountCheckCurrent"
             name="count_check_current"
-            defaultValue={data.count_check_current}
-            aria-describedby="helperCountCheckCurrent"
+            value={data.count_check_current}
+            displayType={"input"}
+            className="form-control"
             disabled={type === "detail"}
-            onChange={handleChange}
+            onValueChange={({ value }) =>
+              handleChange({
+                target: {
+                  name: "count_check_current",
+                  value,
+                },
+              })
+            }
           />
           {error.count_check_current && (
             <Form.Text

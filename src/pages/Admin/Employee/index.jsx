@@ -9,7 +9,12 @@ import _size from "lodash/size";
 import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { actionDelete, actionGetList, resetData } from "store/Employee/action";
+import {
+  actionDelete,
+  actionDownloadExcel,
+  actionGetList,
+  resetData,
+} from "store/Employee/action";
 import FormEmployee from "./FormEmployee";
 import { roleEnum } from "./helper";
 
@@ -25,6 +30,7 @@ function Employee(props) {
   const dispatch = useDispatch();
   const onGetListEmployee = (body) => dispatch(actionGetList(body));
   const onDeleteEmployee = (body) => dispatch(actionDelete(body));
+  const onDownloadExcel = () => dispatch(actionDownloadExcel());
   const onResetData = () => dispatch(resetData());
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -69,6 +75,7 @@ function Employee(props) {
     setCurrentPage(1);
     if (type === "reset") setQuery("");
   };
+
   return (
     <div className="mb-5">
       <TemplateContent
@@ -79,7 +86,7 @@ function Employee(props) {
             setDetail((prev) => ({ ...prev, visible: true, type: "create" })),
         }}
         filter={
-          <div className="d-flex align-items-end gap-2">
+          <div className="d-flex align-items-end gap-2 flex-wrap">
             <div style={{ width: "100%", maxWidth: 250 }}>
               <Form.Label htmlFor="search">Tìm kiếm</Form.Label>
               <Form.Control
@@ -106,6 +113,13 @@ function Employee(props) {
             >
               Đặt lại
             </Button>
+            <Button
+              variant="outline-primary"
+              className="ms-auto"
+              onClick={onDownloadExcel}
+            >
+              Tải file Excel
+            </Button>
           </div>
         }
       >
@@ -131,13 +145,13 @@ function Employee(props) {
                 Quyền
               </th>
               <th scope="col" className="align-middle">
-                Trạng thái
-              </th>
-              <th scope="col" className="align-middle">
                 Số lượt check
               </th>
               <th scope="col" className="align-middle">
                 Đã check
+              </th>
+              <th scope="col" className="align-middle">
+                Trạng thái
               </th>
               <th scope="col" className="align-middle">
                 Hành động
@@ -147,7 +161,7 @@ function Employee(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={9}>
+                <td colSpan={10}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -169,6 +183,8 @@ function Employee(props) {
                 <td className="align-middle">{item.email}</td>
                 <td className="align-middle">{item.phone}</td>
                 <td className="align-middle">{roleEnum[item.role_id]}</td>
+                <td className="align-middle">{item.count_check_current}</td>
+                <td className="align-middle">{item.count_checked}</td>
                 <td className="align-middle">
                   <ToggleSwitch
                     status={item.active}
@@ -184,8 +200,6 @@ function Employee(props) {
                     }
                   />
                 </td>
-                <td className="align-middle">{item.count_check_current}</td>
-                <td className="align-middle">{item.count_checked}</td>
                 <td className="align-middle">
                   <ActionTable
                     onDetail={() =>

@@ -1,5 +1,7 @@
 import { ENDPOINT } from "constants/routerApi";
+import { saveAs } from "file-saver";
 import { get, post, put as puts } from "helper/ajax";
+import { download } from "helper/functions";
 import { all, call, put, takeLatest, takeLeading } from "redux-saga/effects";
 import { addToast } from "store/Toast/action";
 import {
@@ -9,6 +11,8 @@ import {
   actionDeleteSuccess,
   actionDetailFailed,
   actionDetailSuccess,
+  actionDownloadExcelFailed,
+  actionDownloadExcelSuccess,
   actionEditFailed,
   actionEditSuccess,
   actionGetListFailed,
@@ -145,7 +149,7 @@ function* callApiDetail({ id }) {
   }
 }
 
-function* callApơUpdateDetail({ params }) {
+function* callApiUpdateDetail({ params }) {
   try {
     const { id } = params;
     const response = yield call(
@@ -185,6 +189,47 @@ function* callApơUpdateDetail({ params }) {
   }
 }
 
+function* callApiDownloadExcel({ params }) {
+  try {
+    const response = yield call(get, ENDPOINT.DOWNLOAD_EXCEL, {
+      responseType: "blob",
+    });
+    if (response.status === 200) {
+      const blob = new Blob([response.data], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      saveAs(blob, "employee_library.xlsx");
+      yield download(response.data, "employee_function.xlsx");
+      yield put(actionDownloadExcelSuccess(response.data.data));
+      yield put(
+        addToast({
+          text: "Tải xuống thành công",
+          type: "success",
+          title: "",
+        })
+      );
+    } else {
+      yield put(actionDownloadExcelFailed());
+      yield put(
+        addToast({
+          text: "Tải xuống thất bại",
+          type: "danger",
+          title: "",
+        })
+      );
+    }
+  } catch (error) {
+    yield put(actionDownloadExcelFailed(error.response.data.error));
+    yield put(
+      addToast({
+        text: "Tải xuống thất bại",
+        type: "danger",
+        title: "",
+      })
+    );
+  }
+}
+
 export default function* employeeSaga() {
   yield all([
     yield takeLeading(ActionTypes.LIST, callApiList),
@@ -192,6 +237,7 @@ export default function* employeeSaga() {
     yield takeLatest(ActionTypes.EDIT, callApiEdit),
     yield takeLatest(ActionTypes.DELETE, callApiDelete),
     yield takeLatest(ActionTypes.DETAIL, callApiDetail),
-    yield takeLatest(ActionTypes.UPDATE, callApơUpdateDetail),
+    yield takeLatest(ActionTypes.UPDATE, callApiUpdateDetail),
+    yield takeLatest(ActionTypes.DOWNLOAD_EXCEL, callApiDownloadExcel),
   ]);
 }

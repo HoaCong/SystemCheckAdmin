@@ -90,6 +90,21 @@ export const actionDetailFailed = (error) => ({
   error,
 });
 
+export const actionDownloadExcel = (id) => ({
+  type: ActionTypes.DOWNLOAD_EXCEL,
+  id,
+});
+
+export const actionDownloadExcelSuccess = (payload) => ({
+  type: ActionTypes.DOWNLOAD_EXCEL_SUCCESS,
+  payload,
+});
+
+export const actionDownloadExcelFailed = (error) => ({
+  type: ActionTypes.DOWNLOAD_EXCEL_FAILED,
+  error,
+});
+
 export const resetData = () => ({
   type: ActionTypes.RESET_DATA,
 });

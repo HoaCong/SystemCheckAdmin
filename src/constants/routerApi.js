@@ -10,4 +10,5 @@ export const ENDPOINT = {
   ACTIVE_EMPLOYEE: "/api/employee/active/",
   DETAIL_EMPLOYEE: "/api/employee/",
   UPDATE_DETAIL_EMPLOYEE: "/api/employee/detail/",
+  DOWNLOAD_EXCEL: "/api/as/download-excel",
 };
