@@ -7,4 +7,5 @@ export const ROUTES = {
   ADMIN_HOME_PAGE: "/",
   ADMIN_EMPLOYEE: "/employee",
   ADMIN_HISTORY: "/histories",
+  ADMIN_SEARCH: "/search",
 };

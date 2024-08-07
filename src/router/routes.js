@@ -5,6 +5,7 @@ import Employee from "pages/Employee";
 import Histories from "pages/Histories";
 import Login from "pages/Login";
 import PageNotFound from "pages/NotFoundPage";
+import Search from "pages/Search";
 // import Register from "pages/Register";
 
 export const EnumHome = {
@@ -59,6 +60,11 @@ export const publicRoutes = [
         path: ROUTES.CHANGE_PASSWORD,
         name: "Employee",
         element: <ChangePassword />,
+      },
+      {
+        path: ROUTES.ADMIN_SEARCH,
+        name: "Search",
+        element: <Search />,
       },
       {
         path: ROUTES.ADMIN_HISTORY,

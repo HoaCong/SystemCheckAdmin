@@ -4,6 +4,7 @@ import changePasswordSaga from "./ChangePassword/saga";
 import employeeSaga from "./Employee/saga";
 import historiesSaga from "./Histories/saga";
 import loginSaga from "./Login/saga";
+import searchSaga from "./Search/saga";
 
 export default function* rootSaga() {
   yield all([
@@ -11,5 +12,6 @@ export default function* rootSaga() {
     fork(employeeSaga),
     fork(changePasswordSaga),
     fork(historiesSaga),
+    fork(searchSaga),
   ]);
 }

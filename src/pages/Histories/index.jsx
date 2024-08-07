@@ -3,8 +3,8 @@ import CustomPagination from "components/common/CustomPagination";
 import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
 import _size from "lodash/size";
-import { useEffect, useState } from "react";
-import { Spinner } from "react-bootstrap";
+import { Fragment, useEffect, useState } from "react";
+import { Collapse, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { actionHistories, resetData } from "store/Histories/action";
 
@@ -36,51 +36,26 @@ function Histories(props) {
     onGetListHistories({ ...params, page });
   };
 
-  // const handleSearch = (type) => {
-  //   const tmpQuery = !query || type === "reset" ? null : query.trim();
-  //   onGetListHistories({ ...params, page: 1, query: tmpQuery });
-  //   setCurrentPage(1);
-  //   if (type === "reset") setQuery("");
-  // };
+  const [expandedRows, setExpandedRows] = useState(0);
+
+  const handleExpandCollapse = (index) => {
+    setExpandedRows((prev) => {
+      if (prev === index) return -1;
+      return index;
+    });
+  };
+
+  const getData = (item) => {
+    return JSON.parse(item.data);
+  };
 
   return (
     <div className="mb-5">
-      <TemplateContent
-        title="Lịch sử tìm kiếm"
-        // filter={
-        //   <div className="d-flex align-items-end gap-2 flex-wrap">
-        //     <div style={{ width: "100%", maxWidth: 250 }}>
-        //       <Form.Label htmlFor="search">Tìm kiếm</Form.Label>
-        //       <Form.Control
-        //         id="search"
-        //         aria-label="Tìm kiếm"
-        //         placeholder="Tìm kiếm"
-        //         name="query"
-        //         value={query}
-        //         onChange={(e) => {
-        //           setQuery(e.target.value);
-        //         }}
-        //       ></Form.Control>
-        //     </div>
-        //     <Button
-        //       onClick={() => handleSearch("filter")}
-        //       disabled={isLoading && _size(list) > 0}
-        //     >
-        //       Tìm kiếm
-        //     </Button>
-        //     <Button
-        //       variant="outline-secondary"
-        //       disabled={isLoading && _size(list) > 0}
-        //       onClick={() => handleSearch("reset")}
-        //     >
-        //       Đặt lại
-        //     </Button>
-        //   </div>
-        // }
-      >
-        <table className="table table-hover table-striped">
+      <TemplateContent title="Lịch sử tìm kiếm">
+        <table className="table table-hover ">
           <thead>
             <tr>
+              <th scope="col" className="align-middle"></th>
               <th scope="col" className="align-middle">
                 #
               </th>
@@ -104,7 +79,7 @@ function Histories(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={6}>
+                <td colSpan={7}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -117,16 +92,152 @@ function Histories(props) {
               </tr>
             )}
             {list.map((item, index) => (
-              <tr key={item.updatedAt + index}>
-                <th scope="row" className="align-middle">
-                  {index + 1}
-                </th>
-                <td className="align-middle">{item.cmnd || "_"}</td>
-                <td className="align-middle">{item.sdt || "_"}</td>
-                <td className="align-middle">{item.fullname || "_"}</td>
-                <td className="align-middle">{item.ngay_sinh || "_"}</td>
-                <td className="align-middle">{item.tinh || "_"}</td>
-              </tr>
+              <Fragment key={item.updatedAt + index}>
+                <tr onClick={() => handleExpandCollapse(index)}>
+                  <th scope="row" className="align-middle">
+                    <div style={{ width: 16 }}>
+                      {expandedRows === index ? (
+                        <i className="fas fa-chevron-down text-secondary"></i>
+                      ) : (
+                        <i className="fas fa-chevron-right text-secondary"></i>
+                      )}
+                    </div>
+                  </th>
+                  <th scope="row" className="align-middle">
+                    {index + 1}
+                  </th>
+                  <td className="align-middle">{item.cmnd || "_"}</td>
+                  <td className="align-middle">{item.sdt || "_"}</td>
+                  <td className="align-middle">{item.fullname || "_"}</td>
+                  <td className="align-middle">{item.ngay_sinh || "_"}</td>
+                  <td className="align-middle">{item.tinh || "_"}</td>
+                </tr>
+                <tr>
+                  <td colSpan="9" className="p-0">
+                    <Collapse in={expandedRows === index}>
+                      <div>
+                        <div className="card p-2">
+                          <section>
+                            <h5>Thông tin chi tiết</h5>
+                            <table className="table table-hover table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col" className="align-middle">
+                                    CMND/CCCD
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Họ tên
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Ngày sinh
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Số điện thoại
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Email
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Địa chỉ
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.cmnd || "_"}
+                                  </td>
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.ho_va_ten || "_"}
+                                  </td>
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.ngay_sinh || "_"}
+                                  </td>
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.sdt || "_"}
+                                  </td>
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.email || "_"}
+                                  </td>
+
+                                  <td className="align-middle">
+                                    {getData(item)?.infor?.dia_chi_kbxh || "_"}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </section>
+                          <hr />
+                          <section>
+                            <h5>Thông tin liên quan</h5>
+                            <table className="table table-hover table-striped">
+                              <thead>
+                                <tr>
+                                  <th scope="col" className="align-middle">
+                                    #
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    CMND/CCCD
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Họ tên
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Ngày sinh
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Quan hệ
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Số điện thoại
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Email
+                                  </th>
+                                  <th scope="col" className="align-middle">
+                                    Địa chỉ
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {getData(item).relative.map((ele, index) => (
+                                  <tr key={ele.id}>
+                                    <th scope="row" className="align-middle">
+                                      {index + 1}
+                                    </th>
+                                    <td className="align-middle">
+                                      {ele.cmnd || "_"}
+                                    </td>
+                                    <td className="align-middle">
+                                      {ele.ho_va_ten || "_"}
+                                    </td>
+                                    <td className="align-middle">
+                                      {ele.ngay_sinh || "_"}
+                                    </td>
+                                    <td className="align-middle">
+                                      {ele.moi_quan_he || "_"}
+                                    </td>
+                                    <td className="align-middle">
+                                      {ele.sdt || "_"}
+                                    </td>
+                                    <td className="align-middle">
+                                      {ele.email || "_"}
+                                    </td>
+
+                                    <td className="align-middle">
+                                      {ele.dia_chi_kbxh || "_"}
+                                    </td>
+                                  </tr>
+                                ))}
+                              </tbody>
+                            </table>
+                          </section>
+                        </div>
+                      </div>
+                    </Collapse>
+                  </td>
+                </tr>
+              </Fragment>
             ))}
           </tbody>
         </table>

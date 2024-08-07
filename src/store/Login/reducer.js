@@ -91,6 +91,11 @@ const loginReducer = (state = initialState, action) => {
         draft.data.error = "";
         break;
 
+      case ActionTypes.MINUS_COUNT_CHECK:
+        draft.data.user.count_check_current =
+          state.data.user.count_check_current - 1;
+        break;
+
       default:
         return state;
     }

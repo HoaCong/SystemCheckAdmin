@@ -7,6 +7,12 @@ export const MENU_ADMIN = [
     icon: <i className="fas fa-users-cog"></i>,
   },
   {
+    label: "Tìm kiếm",
+    active: false,
+    src: ROUTES.ADMIN_SEARCH,
+    icon: <i className="fas fa-search"></i>,
+  },
+  {
     label: "Lịch sử tìm kiếm",
     active: false,
     src: ROUTES.ADMIN_HISTORY,
@@ -22,6 +28,12 @@ export const MENU_MANAGER = [
     icon: <i className="fas fa-users-cog"></i>,
   },
   {
+    label: "Tìm kiếm",
+    active: false,
+    src: ROUTES.ADMIN_SEARCH,
+    icon: <i className="fas fa-search"></i>,
+  },
+  {
     label: "Lịch sử tìm kiếm",
     active: false,
     src: ROUTES.ADMIN_HISTORY,
@@ -30,6 +42,12 @@ export const MENU_MANAGER = [
 ];
 
 export const MENU_EMPLOYEE = [
+  {
+    label: "Tìm kiếm",
+    active: false,
+    src: ROUTES.ADMIN_SEARCH,
+    icon: <i className="fas fa-search"></i>,
+  },
   {
     label: "Lịch sử tìm kiếm",
     active: false,

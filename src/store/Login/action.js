@@ -43,3 +43,7 @@ export const actionUpdateUserLogin = (data) => ({
 export const actionClearError = () => ({
   type: ActionTypes.CLEAR_ERROR,
 });
+
+export const actionMinusCountCheck = () => ({
+  type: ActionTypes.MINUS_COUNT_CHECK,
+});

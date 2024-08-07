@@ -6,7 +6,6 @@ import * as ActionTypes from "./constant";
 function* callApiHistories({ params }) {
   try {
     const response = yield call(get, ENDPOINT.HISTORIES, params);
-    console.log("function*callApiHistories  response:", response);
     if (response.status === 200) {
       yield put(actionHistoriesSuccess(response.data));
     } else {

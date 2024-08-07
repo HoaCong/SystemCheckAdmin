@@ -12,4 +12,5 @@ export const ENDPOINT = {
   DOWNLOAD_EXCEL: "/api/as/download-excel",
   CHANGE_PASSWORD: "/api/employee/changepassword/",
   HISTORIES: "/api/histories",
+  SEARCH: "/api/info",
 };

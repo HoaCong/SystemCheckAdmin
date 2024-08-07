@@ -126,6 +126,9 @@ button {
 span.required {
   color: red;
 }
+#search-date .react-datepicker-wrapper {
+  display: block;
+}
 
 #btn-custom {
   border: none;
