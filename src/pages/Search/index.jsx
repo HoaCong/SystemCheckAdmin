@@ -33,7 +33,9 @@ function Search(props) {
       query,
       queryCustom: {
         ...queryCustom,
-        date: format(queryCustom.date, "dd/MM/yyyy"),
+        date: queryCustom.date
+          ? format(new Date(queryCustom.date), "dd/MM/yyyy")
+          : queryCustom.date,
       },
       type: currentTab,
     });
