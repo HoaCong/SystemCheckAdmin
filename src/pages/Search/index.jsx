@@ -51,7 +51,7 @@ function Search(props) {
   };
 
   return (
-    <div className="mb-5">
+    <div>
       <TemplateContent
         title="Tìm kiếm"
         filter={
@@ -166,6 +166,9 @@ function Search(props) {
             </div>
           </>
         }
+        cardProps={{
+          className: "col-12 card overflow-y-auto result-search",
+        }}
       >
         {!(isLoading || isSuccess || isFailure) && (
           <div>Nhập thông tin để tra cứu kết quả</div>
@@ -175,147 +178,104 @@ function Search(props) {
           <>
             <h5>Thông tin chi tiết</h5>
             <section className="card p-2">
-              {/* <table className="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col" className="align-middle">
-                      CMND/CCCD
-                    </th>
-                    <th scope="col" className="align-middle">
-                      Họ tên
-                    </th>
-                    <th scope="col" className="align-middle">
-                      Ngày sinh
-                    </th>
-                    <th scope="col" className="align-middle">
-                      Số điện thoại
-                    </th>
-                    <th scope="col" className="align-middle">
-                      Email
-                    </th>
-                    <th scope="col" className="align-middle">
-                      Địa chỉ
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="align-middle">{data.info.cmnd || "_"}</td>
-                    <td className="align-middle">
-                      {data.info.ho_va_ten || "_"}
-                    </td>
-                    <td className="align-middle">
-                      {data.info.ngay_sinh || "_"}
-                    </td>
-                    <td className="align-middle">{data.info.sdt || "_"}</td>
-                    <td className="align-middle">{data.info.email || "_"}</td>
-
-                    <td className="align-middle">
-                      {data.info.dia_chi_kbxh || "_"}
-                    </td>
-                  </tr>
-                </tbody>
-              </table> */}
-              <div className="container">
-                <div className="row">
-                  <div className="col-12 col-sm-6">
+              <div className="row">
+                <div className="col-12 col-sm-6">
+                  <div>
                     <div>
-                      <div>
-                        <strong className="me-1">Mã kiểm tra:</strong>{" "}
-                        <span>{data.info?.ma_kiem_tra || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Họ và tên:</strong>{" "}
-                        <span>{data.info?.ho_va_ten || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Mối quan hệ:</strong>{" "}
-                        <span>{data.info?.moi_quan_he || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">CMND:</strong>{" "}
-                        <span>{data.info?.cmnd || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Ngày sinh:</strong>{" "}
-                        <span>{data.info?.ngay_sinh || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">SĐT:</strong>{" "}
-                        <span>{data.info?.sdt || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Mã tỉnh:</strong>{" "}
-                        <span>{data.info?.ma_tinh || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Địa chỉ:</strong>{" "}
-                        <span>{data.info?.dia_chi_kbxh || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Từ tháng:</strong>{" "}
-                        <span>{data.info?.tu_thang || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Đến tháng:</strong>{" "}
-                        <span>{data.info?.den_thang || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Chức danh:</strong>{" "}
-                        <span>{data.info?.chuc_danh || "_"}</span>
-                      </div>
+                      <strong className="me-1">Mã kiểm tra:</strong>{" "}
+                      <span>{data.info?.ma_kiem_tra || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Họ và tên:</strong>{" "}
+                      <span>{data.info?.ho_va_ten || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Mối quan hệ:</strong>{" "}
+                      <span>{data.info?.moi_quan_he || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">CMND:</strong>{" "}
+                      <span>{data.info?.cmnd || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Ngày sinh:</strong>{" "}
+                      <span>{data.info?.ngay_sinh || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">SĐT:</strong>{" "}
+                      <span>{data.info?.sdt || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Mã tỉnh:</strong>{" "}
+                      <span>{data.info?.ma_tinh || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Địa chỉ:</strong>{" "}
+                      <span>{data.info?.dia_chi_kbxh || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Từ tháng:</strong>{" "}
+                      <span>{data.info?.tu_thang || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Đến tháng:</strong>{" "}
+                      <span>{data.info?.den_thang || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Chức danh:</strong>{" "}
+                      <span>{data.info?.chuc_danh || "_"}</span>
                     </div>
                   </div>
-                  <div className="col-12 col-sm-6">
+                </div>
+                <div className="col-12 col-sm-6">
+                  <div>
                     <div>
-                      <div>
-                        <strong className="me-1">Mức lương:</strong>{" "}
-                        <span>{data.info?.muc_luong || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">HSL:</strong>{" "}
-                        <span>{data.info?.hsl || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Tên đơn vị:</strong>{" "}
-                        <span>{data.info?.ten_don_vi || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Tên phòng ban:</strong>{" "}
-                        <span>{data.info?.ten_phong_ban || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Nơi làm việc:</strong>{" "}
-                        <span>{data.info?.noi_lam_viec || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Tên nhân sự:</strong>{" "}
-                        <span>{data.info?.ten_nhan_su || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">SĐT nhân sự:</strong>{" "}
-                        <span>{data.info?.sdt_nhan_su || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Email:</strong>{" "}
-                        <span>{data.info?.email || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Giám đốc công ty:</strong>{" "}
-                        <span>{data.info?.giam_doc_cong_ty || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Số CMND:</strong>{" "}
-                        <span>{data.info?.so_cmnd || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">SĐT giám đốc:</strong>{" "}
-                        <span>{data.info?.sdt_giam_doc || "_"}</span>
-                      </div>
-                      <div>
-                        <strong className="me-1">Ghi chú:</strong>{" "}
-                        <span>{data.info?.ghi_chu || "_"}</span>
-                      </div>
+                      <strong className="me-1">Mức lương:</strong>{" "}
+                      <span>{data.info?.muc_luong || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">HSL:</strong>{" "}
+                      <span>{data.info?.hsl || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Tên đơn vị:</strong>{" "}
+                      <span>{data.info?.ten_don_vi || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Tên phòng ban:</strong>{" "}
+                      <span>{data.info?.ten_phong_ban || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Nơi làm việc:</strong>{" "}
+                      <span>{data.info?.noi_lam_viec || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Tên nhân sự:</strong>{" "}
+                      <span>{data.info?.ten_nhan_su || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">SĐT nhân sự:</strong>{" "}
+                      <span>{data.info?.sdt_nhan_su || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Email:</strong>{" "}
+                      <span>{data.info?.email || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Giám đốc công ty:</strong>{" "}
+                      <span>{data.info?.giam_doc_cong_ty || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Số CMND:</strong>{" "}
+                      <span>{data.info?.so_cmnd || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">SĐT giám đốc:</strong>{" "}
+                      <span>{data.info?.sdt_giam_doc || "_"}</span>
+                    </div>
+                    <div>
+                      <strong className="me-1">Ghi chú:</strong>{" "}
+                      <span>{data.info?.ghi_chu || "_"}</span>
                     </div>
                   </div>
                 </div>

@@ -51,9 +51,14 @@ function Histories(props) {
   };
 
   return (
-    <div className="mb-5">
-      <TemplateContent title="Lịch sử tìm kiếm">
-        <table className="table table-hover ">
+    <div>
+      <TemplateContent
+        title="Lịch sử tìm kiếm"
+        cardProps={{
+          className: "col-12 card result-table overflow-auto",
+        }}
+      >
+        <table className="table table-hover">
           <thead>
             <tr>
               <th scope="col" className="align-middle"></th>
@@ -80,7 +85,7 @@ function Histories(props) {
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="overflow-auto tbody-scroll">
             {isLoading && _size(list) === 0 && (
               <tr>
                 <td colSpan={8}>

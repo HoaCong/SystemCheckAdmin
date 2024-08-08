@@ -175,6 +175,12 @@ span.required {
     color: #0d6efd;
   }
 }
+.result-search {
+  max-height: calc(100vh - 300px) !important;
+}
+.result-table {
+  max-height: calc(100vh - 150px) !important;
+}
 @media only screen and (max-width: 992px) {
   .hidden-widget {
     display: none;

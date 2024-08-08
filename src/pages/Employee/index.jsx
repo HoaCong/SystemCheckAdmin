@@ -87,7 +87,7 @@ function Employee(props) {
   };
 
   return (
-    <div className="mb-5">
+    <div>
       <TemplateContent
         title="Danh sách nhân viên"
         showNew
