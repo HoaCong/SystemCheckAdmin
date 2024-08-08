@@ -2,6 +2,7 @@
 import CustomPagination from "components/common/CustomPagination";
 import LinearProgress from "components/common/LinearProgress";
 import TemplateContent from "components/layout/TemplateContent";
+import { format } from "date-fns";
 import _size from "lodash/size";
 import { Fragment, useEffect, useState } from "react";
 import { Collapse, Spinner } from "react-bootstrap";
@@ -36,7 +37,7 @@ function Histories(props) {
     onGetListHistories({ ...params, page });
   };
 
-  const [expandedRows, setExpandedRows] = useState(0);
+  const [expandedRows, setExpandedRows] = useState(null);
 
   const handleExpandCollapse = (index) => {
     setExpandedRows((prev) => {
@@ -60,6 +61,9 @@ function Histories(props) {
                 #
               </th>
               <th scope="col" className="align-middle">
+                Thời gian
+              </th>
+              <th scope="col" className="align-middle">
                 Chứng minh thư/CCCD
               </th>
               <th scope="col" className="align-middle">
@@ -79,7 +83,7 @@ function Histories(props) {
           <tbody>
             {isLoading && _size(list) === 0 && (
               <tr>
-                <td colSpan={7}>
+                <td colSpan={8}>
                   <div
                     className="d-flex justify-content-center align-items-center w-full"
                     style={{ height: 400 }}
@@ -106,6 +110,11 @@ function Histories(props) {
                   <th scope="row" className="align-middle">
                     {index + 1}
                   </th>
+                  <td className="align-middle">
+                    {item.updatedAt
+                      ? format(item.updatedAt, "dd-MM-yyyy")
+                      : "_"}
+                  </td>
                   <td className="align-middle">{item.cmnd || "_"}</td>
                   <td className="align-middle">{item.sdt || "_"}</td>
                   <td className="align-middle">{item.fullname || "_"}</td>
