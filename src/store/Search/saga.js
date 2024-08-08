@@ -1,5 +1,5 @@
 import { ENDPOINT } from "constants/routerApi";
-import { get } from "helper/ajax";
+import { get, post } from "helper/ajax";
 import { all, call, put, takeLeading } from "redux-saga/effects";
 import { actionMinusCountCheck } from "store/Login/action";
 import { actionSearchFailed, actionSearchSuccess } from "./action";
@@ -10,20 +10,27 @@ function* callApiSearch({ params }) {
     const CASE_SURFIX = {
       cccd: {
         surfix: "/cccd/" + query,
-        option: null,
+        options: null,
+        method: get,
       },
       phone: {
         surfix: "/phone/" + query,
-        option: null,
+        options: null,
+        method: get,
       },
-      custome: {
+      custom: {
         surfix: "",
-        option: queryCustom,
+        options: queryCustom,
+        method: post,
       },
     };
     const surfix = CASE_SURFIX[type].surfix;
     const options = CASE_SURFIX[type].options;
-    const response = yield call(get, ENDPOINT.SEARCH + surfix, options);
+    const response = yield call(
+      CASE_SURFIX[type].method,
+      ENDPOINT.SEARCH + surfix,
+      options
+    );
     if (response.status === 200 && response.data.status) {
       yield put(actionSearchSuccess(response.data));
       yield put(actionMinusCountCheck());

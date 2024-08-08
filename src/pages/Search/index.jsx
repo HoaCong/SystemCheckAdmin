@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import TemplateContent from "components/layout/TemplateContent";
+import { format } from "date-fns";
 import _map from "lodash/map";
 import { useState } from "react";
 import { Button, Form, Tab, Tabs } from "react-bootstrap";
@@ -30,7 +31,10 @@ function Search(props) {
   const handleSearch = () => {
     onSearch({
       query,
-      queryCustom,
+      queryCustom: {
+        ...queryCustom,
+        date: format(queryCustom.date, "dd/MM/yyyy"),
+      },
       type: currentTab,
     });
   };
@@ -125,7 +129,10 @@ function Search(props) {
                       className="form-control"
                       name="date"
                       onChange={(date) => {
-                        setQueryCustom((prevData) => ({ ...prevData, date }));
+                        setQueryCustom((prevData) => ({
+                          ...prevData,
+                          date,
+                        }));
                       }}
                     />
                   </div>
