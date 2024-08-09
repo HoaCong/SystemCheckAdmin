@@ -2,7 +2,7 @@
 import TemplateContent from "components/layout/TemplateContent";
 import { format } from "date-fns";
 import _map from "lodash/map";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Form, Tab, Tabs } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import { NumericFormat } from "react-number-format";
@@ -27,6 +27,12 @@ function Search(props) {
   });
 
   const [currentTab, setCurrentTab] = useState("cccd");
+
+  useEffect(() => {
+    return () => {
+      onResetData();
+    };
+  }, []);
 
   const handleSearch = () => {
     onSearch({

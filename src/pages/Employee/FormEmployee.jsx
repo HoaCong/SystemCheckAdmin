@@ -19,7 +19,7 @@ const initialData = {
   email: "",
   phone: "",
   password: "",
-  role_id: "MANAGER",
+  role_id: "",
 };
 
 function FormEmployee({ data: { type, visible, info }, onClear }) {
@@ -102,7 +102,9 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
 
   const ROLE = {
     ADMIN: roleEnum,
-    MANAGER: [roleEnum[1]],
+    MANAGER: {
+      EMPLOYEE: "Employee",
+    },
   };
 
   return (
@@ -241,12 +243,24 @@ function FormEmployee({ data: { type, visible, info }, onClear }) {
             onChange={handleChange}
             disabled={type === "detail"}
           >
+            <option value="" disabled>
+              Chọn quyền
+            </option>
             {_map(ROLE[user?.role_id], (value, index) => (
               <option key={value} value={index}>
                 {value}
               </option>
             ))}
           </Form.Select>
+          {error.role_id && (
+            <Form.Text
+              id="helperRoleId"
+              danger="true"
+              bsPrefix="d-inline-block text-danger lh-1"
+            >
+              {error.role_id}
+            </Form.Text>
+          )}
         </div>
         <div className="col-6 mt-3">
           <Form.Label htmlFor="CountCheckCurrent">
