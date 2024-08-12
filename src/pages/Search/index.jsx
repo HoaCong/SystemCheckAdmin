@@ -160,7 +160,7 @@ function Search(props) {
                       </option>
                       {_map(CODE_PREFECTURE, (item, index) => (
                         <option key={index} value={item.code}>
-                          {item.label}
+                          {item.code} - {item.label}
                         </option>
                       ))}
                     </Form.Select>
