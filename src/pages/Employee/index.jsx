@@ -222,9 +222,16 @@ function Employee(props) {
                     onDetail={() =>
                       setDetail({ info: item, visible: true, type: "detail" })
                     }
-                    onEdit={() =>
-                      setDetail({ info: item, visible: true, type: "edit" })
-                    }
+                    {...("ADMIN" === user?.role_id
+                      ? {
+                          onEdit: (e) =>
+                            setDetail({
+                              info: item,
+                              visible: true,
+                              type: "edit",
+                            }),
+                        }
+                      : [])}
                     {...("ADMIN" === user?.role_id
                       ? {
                           onDelete: (e) =>
