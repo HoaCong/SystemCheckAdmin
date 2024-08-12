@@ -124,18 +124,14 @@ function Employee(props) {
               Đặt lại
             </Button>
 
-            {"ADMIN" === user?.role_id ? (
-              <Button variant="outline-primary" className="ms-auto">
-                <a
-                  href={`${process.env.REACT_APP_BASE_URL}/api/as/download-excel`}
-                  download="file.xlsx"
-                >
-                  Xuất file excel
-                </a>
-              </Button>
-            ) : (
-              <></>
-            )}
+            <Button variant="outline-primary" className="ms-auto">
+              <a
+                href={`${process.env.REACT_APP_BASE_URL}/api/as/download-excel/${user?.role_id}`}
+                download="file.xlsx"
+              >
+                Xuất file excel
+              </a>
+            </Button>
           </div>
         }
       >
