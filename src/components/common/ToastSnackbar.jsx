@@ -18,7 +18,7 @@ function ToastComponent() {
         <Toast
           key={toast.key}
           autohide
-          delay={3000}
+          delay={toast?.life || 3000}
           className={`mb-3 bg-${toast.type}`}
           onClose={() => {
             const newToasts = toasts.filter((item) => item.key !== toast.key);

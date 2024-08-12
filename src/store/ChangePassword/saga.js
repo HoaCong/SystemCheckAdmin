@@ -1,6 +1,7 @@
 import { ENDPOINT } from "constants/routerApi";
 import { put as puts } from "helper/ajax";
 import { all, call, put, takeLeading } from "redux-saga/effects";
+import { actionLogout } from "store/Login/action";
 import { addToast } from "store/Toast/action";
 import {
   actionChangePasswordFailed,
@@ -34,6 +35,17 @@ function* callApiChangePassword({ params }) {
       );
     }
   } catch (error) {
+    if (error.response.status === 401) {
+      yield put(actionLogout());
+      yield put(
+        addToast({
+          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
+          type: "warning",
+          title: "",
+          life: 5000,
+        })
+      );
+    }
     yield put(actionChangePasswordFailed(error.response.data.error));
     yield put(
       addToast({
