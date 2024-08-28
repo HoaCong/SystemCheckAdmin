@@ -8,4 +8,5 @@ export const ROUTES = {
   ADMIN_EMPLOYEE: "/employee",
   ADMIN_HISTORY: "/histories",
   ADMIN_SEARCH: "/search",
+  ADMIN_SEARCH_CODE_PROVINCE: "/code_province",
 };

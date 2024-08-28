@@ -40,7 +40,7 @@ function CustomPagination({
     totalPages > 1 && (
       <div>
         <div className="d-flex justify-content-center">
-          <Pagination>
+          <Pagination className="mb-0">
             <Pagination.First onClick={() => onPageChange(1)} />
             <Pagination.Prev
               onClick={() => onPageChange(currentPage - 1)}

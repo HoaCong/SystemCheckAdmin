@@ -13,11 +13,17 @@ export const MENU_ADMIN = [
     icon: <i className="fas fa-search"></i>,
   },
   {
-    label: "Lịch sử tìm kiếm",
+    label: "Tìm theo mã tỉnh",
     active: false,
-    src: ROUTES.ADMIN_HISTORY,
-    icon: <i className="fas fa-history"></i>,
+    src: ROUTES.ADMIN_SEARCH_CODE_PROVINCE,
+    icon: <i className="fas fa-search"></i>,
   },
+  // {
+  //   label: "Lịch sử tìm kiếm",
+  //   active: false,
+  //   src: ROUTES.ADMIN_HISTORY,
+  //   icon: <i className="fas fa-history"></i>,
+  // },
 ];
 
 export const MENU_MANAGER = [
@@ -34,11 +40,17 @@ export const MENU_MANAGER = [
     icon: <i className="fas fa-search"></i>,
   },
   {
-    label: "Lịch sử tìm kiếm",
+    label: "Tìm theo mã tỉnh",
     active: false,
-    src: ROUTES.ADMIN_HISTORY,
-    icon: <i className="fas fa-history"></i>,
+    src: ROUTES.ADMIN_SEARCH_CODE_PROVINCE,
+    icon: <i className="fas fa-search"></i>,
   },
+  // {
+  //   label: "Lịch sử tìm kiếm",
+  //   active: false,
+  //   src: ROUTES.ADMIN_HISTORY,
+  //   icon: <i className="fas fa-history"></i>,
+  // },
 ];
 
 export const MENU_EMPLOYEE = [
@@ -49,9 +61,15 @@ export const MENU_EMPLOYEE = [
     icon: <i className="fas fa-search"></i>,
   },
   {
-    label: "Lịch sử tìm kiếm",
+    label: "Tìm theo mã tỉnh",
     active: false,
-    src: ROUTES.ADMIN_HISTORY,
-    icon: <i className="fas fa-history"></i>,
+    src: ROUTES.ADMIN_SEARCH_CODE_PROVINCE,
+    icon: <i className="fas fa-search"></i>,
   },
+  // {
+  //   label: "Lịch sử tìm kiếm",
+  //   active: false,
+  //   src: ROUTES.ADMIN_HISTORY,
+  //   icon: <i className="fas fa-history"></i>,
+  // },
 ];

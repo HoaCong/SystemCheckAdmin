@@ -30,7 +30,7 @@ function TemplateContent({
       )}
 
       <div className="col-12 card" {...cardProps}>
-        <div className="card-body">{children}</div>
+        <div className="card-body overflow-auto result-search">{children}</div>
       </div>
     </div>
   );

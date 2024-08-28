@@ -13,4 +13,5 @@ export const ENDPOINT = {
   CHANGE_PASSWORD: "/api/employee/changepassword/",
   HISTORIES: "/api/histories",
   SEARCH: "/api/info",
+  SEARCH_BY_PROVINCE: "/api/info/search",
 };

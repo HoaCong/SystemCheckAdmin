@@ -6,6 +6,7 @@ import Histories from "pages/Histories";
 import Login from "pages/Login";
 import PageNotFound from "pages/NotFoundPage";
 import Search from "pages/Search";
+import SearchProvince from "pages/SearchProvince";
 // import Register from "pages/Register";
 
 export const EnumHome = {
@@ -67,10 +68,15 @@ export const publicRoutes = [
         element: <Search />,
       },
       {
-        path: ROUTES.ADMIN_HISTORY,
-        name: "Histories",
-        element: <Histories />,
+        path: ROUTES.ADMIN_SEARCH_CODE_PROVINCE,
+        name: "Search Province",
+        element: <SearchProvince />,
       },
+      // {
+      //   path: ROUTES.ADMIN_HISTORY,
+      //   name: "Histories",
+      //   element: <Histories />,
+      // },
     ],
   },
   { path: ROUTES.LOGIN, name: "Login Page", element: <Login /> },

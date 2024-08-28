@@ -181,6 +181,18 @@ span.required {
 .result-table {
   max-height: calc(100vh - 150px) !important;
 }
+
+table#search_province {
+  thead {
+    top: -16px;
+    th {
+      white-space: nowrap;
+      min-width: max-content;
+      padding-top: 12px;
+      padding-bottom: 16px;
+    }
+  }
+}
 @media only screen and (max-width: 992px) {
   .hidden-widget {
     display: none;
