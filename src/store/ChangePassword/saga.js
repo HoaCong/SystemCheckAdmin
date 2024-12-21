@@ -35,17 +35,7 @@ function* callApiChangePassword({ params }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+   
     yield put(actionChangePasswordFailed(error.response.data.error));
     yield put(
       addToast({

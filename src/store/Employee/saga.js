@@ -30,17 +30,7 @@ function* callApiList({ params }) {
       yield put(actionGetListFailed());
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+    
     yield put(actionGetListFailed(error.response.data.error));
   }
 }
@@ -68,17 +58,7 @@ function* callApiAdd({ params }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+   
     yield put(actionAddFailed(error.response.data.error));
     yield put(
       addToast({
@@ -115,17 +95,6 @@ function* callApiEdit({ params }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
@@ -160,17 +129,6 @@ function* callApiChangeActive({ id }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
@@ -205,17 +163,6 @@ function* callApiDelete({ id }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
     yield put(actionDeleteFailed(error.response.data.error));
     yield put(
       addToast({
@@ -236,17 +183,7 @@ function* callApiDetail({ id }) {
       yield put(actionDetailFailed());
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+   
     yield put(actionDetailFailed(error.response.data.error));
   }
 }
@@ -280,17 +217,7 @@ function* callApiUpdateDetail({ params }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+   
     yield put(actionEditFailed(error.response.data.error));
     yield put(
       addToast({
@@ -331,17 +258,7 @@ function* callApiDownloadExcel({ params }) {
       );
     }
   } catch (error) {
-    if (error.response.status === 401) {
-      yield put(actionLogout());
-      yield put(
-        addToast({
-          text: "Tài khoản được đăng nhập từ nơi khác, vui lòng đăng nhập lại để sử dụng",
-          type: "warning",
-          title: "",
-          life: 5000,
-        })
-      );
-    }
+   
     yield put(actionDownloadExcelFailed(error.response.data.error));
     yield put(
       addToast({
